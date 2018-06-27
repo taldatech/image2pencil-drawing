@@ -1,5 +1,6 @@
 # image2pencil-drawing
 Python implementation of the Pencil Drawing by Sketch and Tone algorithm
+![alt text](https://github.com/taldatech/image2pencil-drawing/blob/master/images/dp_compare.JPG)
 ### Based on the paper "Combining Sketch and Tone for Pencil Drawing Production" by Cewu Lu, Li Xu, Jiaya Jia
 #### International Symposium on Non-Photorealistic Animation and Rendering (NPAR 2012), June 2012
 Project site can be found here:
@@ -21,7 +22,8 @@ Combining the results from these steps should yield the desired result. The work
 
 * Both figures were taken from the original paper
 
-Some results:
+Another example:
+![alt text](https://github.com/taldatech/image2pencil-drawing/blob/master/images/jl_compare.JPG)
 
 # Usage
 ```python
