@@ -32,7 +32,8 @@ import matplotlib.pyplot as plt
 ex_img = io.imread('./inputs/11--128.jpg')
 pencil_tex = './pencils/pencil1.jpg'
 ex_im_pen = gen_pencil_drawing(ex_img, kernel_size=8, stroke_width=0, num_of_directions=8, smooth_kernel="gauss",
-                       gradient_method=0, rgb=True, w_group=2, pencil_texture_path=pencil_tex)
+                       gradient_method=0, rgb=True, w_group=2, pencil_texture_path=pencil_tex,
+                       stroke_darkness= 2,tone_darkness=1.5)
 plt.rcParams['figure.figsize'] = [16,10]
 plt.imshow(ex_im_pen)
 plt.axis("off")
@@ -46,6 +47,8 @@ plt.axis("off")
 * rgb = True if the original image has 3 channels, False if grayscale
 * w_group = 3 possible weight groups (0, 1, 2) for the histogram distribution, according to the paper (brighter to darker)
 * pencil_texture_path = path to the Pencil Texture Map to use (4 options in "./pencils", you can add your own)
+* stroke_darkness = 1 is the same, up is darker.
+* tone_darkness = as above
 
 # Folders
 * inputs: test images from the publishers' website: http://www.cse.cuhk.edu.hk/leojia/projects/pencilsketch/pencil_drawing.htm
@@ -53,4 +56,5 @@ plt.axis("off")
 
 # Reference
 [1] Lu C, Xu L, Jia J. Combining sketch and tone for pencil drawing production[C]//Proceedings of the Symposium on Non-Photorealistic Animation and Rendering. Eurographics Association, 2012: 65-73.
+
 [2] Matlab implementation by "candtcat1992" - https://github.com/candycat1992/PencilDrawing
