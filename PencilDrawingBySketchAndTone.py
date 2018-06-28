@@ -183,7 +183,7 @@ def gen_pencil_texture(img, H, J):
 
 # It's time to pack it all up (WOOHOOO!)
 def gen_pencil_drawing(img, kernel_size, stroke_width=0, num_of_directions=8, smooth_kernel="gauss",
-                       gradient_method=0, rgb=False, w_group=0, pencil_texture_path=""):
+                       gradient_method=0, rgb=False, w_group=0, pencil_texture_path="", stroke_darkness=1, tone_darkness=1):
     if not rgb:
         # Grayscale image:
         im = img
@@ -194,6 +194,7 @@ def gen_pencil_drawing(img, kernel_size, stroke_width=0, num_of_directions=8, sm
     # Generate the Stroke Map:
     S = gen_stroke_map(im, kernel_size, stroke_width=stroke_width, num_of_directions=num_of_directions,
                        smooth_kernel=smooth_kernel, gradient_method=gradient_method)
+    S = np.power(S, stroke_darkness)
     # Generate the Tone Map:
     J = gen_tone_map(im, w_group=w_group)
     
@@ -204,7 +205,7 @@ def gen_pencil_drawing(img, kernel_size, stroke_width=0, num_of_directions=8, sm
         pencil_texture = io.imread(pencil_texture_path, as_gray=True)
     # Generate the Pencil Texture Map:
     T = gen_pencil_texture(im, pencil_texture, J)
-    
+    T = np.power(T, tone_darkness)
     # The final Y channel:
     R = np.multiply(S, T)
     
@@ -212,6 +213,5 @@ def gen_pencil_drawing(img, kernel_size, stroke_width=0, num_of_directions=8, sm
         return R
     else:
         yuv_img[:,:,0] = R
-        return color.yuv2rgb(yuv_img)
-
+        return exposure.rescale_intensity(color.yuv2rgb(yuv_img), in_range=(0, 1))
 
